@@ -19,11 +19,21 @@
       width: 1280px;
       background-color: yellow;
     }
+    #header {
+      text-align: left;
+    }
     #header-hamburger {
       margin-top: 18px;
-      background-color: blue;
-      width: 48px;
-      height: 48px;
+      padding: 10px;
+      display: inline-block;
+    }
+    #header-hamburger > div {
+      background-image: url(./sp_main.png);
+      width: 28px;
+      height: 28px;
+      background-position: -311px -166px;
+      background-size: 452px 436px;
+      background-repeat: no-repeat;
     }
     #main {
       height: 2000px;
@@ -35,7 +45,7 @@
     <div id="wrap-center">
       <div id="header">
         <div id="header-hamburger">
-
+          <div></div>
         </div>
       </div>
       <div id="search"></div>
