@@ -76,7 +76,7 @@
     * {
       box-sizing: border-box;
     }
-    html,body {
+    html,body,form {
       margin: 0;
       padding: 0;
     }
@@ -91,6 +91,7 @@
     #header {
       text-align: left;
       position: relative;
+      height: 64px;
     }
     #header-hamburger {
       position: absolute;
@@ -300,7 +301,29 @@
           </button>
         </button>
       </div>
-      <div id="search"></div>
+      <style>
+        #search > form {
+          display: inline-block;
+          width: 706px;
+          height: 58px;
+          border: 1px solid #03c75a;
+          border-radius: 33px;
+        }
+        #search > form > input {
+          width: 480px;
+          height: 100%;
+          padding: 17px 0;
+          border: none;
+          outline: none;
+        }
+      </style>
+      <div id="search">
+        <form action="">
+          <label for="search-input" class="blind">검색어 입력</label>
+          <input id="search-input" type="text"/>
+          <button class="blind">검색</button>
+        </form>
+      </div>
       <div id="nav"></div>
       <div id="main"></div>
     </div>
