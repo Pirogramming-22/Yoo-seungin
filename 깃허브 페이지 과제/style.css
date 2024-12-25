@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #24292e;
+  font-family: Arial, sans-serif;
+  color: white;
+  line-height: 1.6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #24292e;
+}
+
+.logo img {
+  margin-left: 90px;
+  width: 40px;
+  height: 40px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-right: 800px;
+}
+
+.header-left a {
+  text-decoration: none;
+  color: white;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.main-nav {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  gap: 15px;
+}
+
+.main-nav li {
+  margin-left: 20px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.search-github {
+  padding: 8px 12px; 
+  border: 1px solid #444d56; 
+  background-color: #3d464d;
+  color: #ffffff; 
+  border-radius: 6px; 
+  width: 210px; 
+  outline: none; 
+  font-size: 14px; 
+  font-family: Arial, sans-serif; 
+}
+
+.search-github::placeholder {
+  color: #c6cbd1; 
+}
+
+.sign-in, .sign-up {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+.sign-up {
+  border: 1px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.sign-up:hover {
+  background-color: #218838;
+}
+
+.center-container {
+  display: flex;
+  justify-content: space-around; 
+  padding-bottom: 5px;
+}
+
+.text-container {
+  width: 50%;
+  text-align: right;
+  margin-right: 150px;
+  margin-top: 130px;
+}
+
+.text-container h1 {
+  font-size: 62px;
+  margin-bottom: 10px;
+}
+
+.text-container p {
+  font-size: 22px;
+  margin-bottom: 5px;
+  color: #d1d5da;
+}
+
+.login-container {
+  background-color: white;
+  color: #24292e;
+  padding: 20px;
+  width: 470px;
+  height: 540px;
+  border-radius: 8px;
+  margin-right: 420px;
+  margin-bottom: 80px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container label {
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.login-container input {
+  padding: 15px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.login-container input:focus {
+  background-color: #e8f0fe;
+  outline: none;
+}
+
+.login-container button {
+  margin-top: 30px;
+  padding: 27px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.login-container button:hover {
+  background-color: #218838;
+}
+.login-container-text1 {
+  margin-top: 20px;
+}
+
+.login-container-text2 {
+  margin-top: 40px;
+}
+.login-container p {
+  font-size: 13px;
+}
+
+.login-container a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: white;
+  text-align: right;
+  color: white;
+}
+
+.footer img {
+  width: 440px;
+  height: auto;
+  margin-right: 200px;
+}
