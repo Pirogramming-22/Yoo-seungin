@@ -590,9 +590,6 @@
           border: 1px solid #e3e5e8; 
           margin-bottom: 16px;
         }
-        #main-shopping {
-          height: 560px;
-        }
         #main-login {
           height: 164px;
           padding: 21px 20px 18px;
@@ -670,7 +667,7 @@
           display: flex;
           flex-flow: column;
         }
-        #main-newstand-top {
+        #main-newstand-top, #main-shopping-top {
           flex: 1;
           padding: 18px 20px;
         }
@@ -685,16 +682,16 @@
           border-radius: 50%;
           vertical-align: 5px;
         }
-        #main-newstand-top .slash, #main-newstand-top .dot {
+        .left-section .slash, .left-section .dot {
           color: rgba(8,8,8,.5);
           font-weight: 800;
         }
-        #main-newstand-top .slash {
+        .left-section .slash {
           position: relative;
           padding-left: 26px;
           font-size: 1.6rem;
         }
-        #main-newstand-top .slash::before {
+        .left-section .slash::before {
           content: "";
           display: inline-block;
           position: absolute;
@@ -708,7 +705,7 @@
           -ms-transform: skewX(-15deg);     /* 옛날 브라우저를 위해서 존재 */
           transform: skewX(-15deg);
         }
-        #main-newstand header {
+        .left-section header {
           font-size: 1.6rem;
           color: rgba(8,8,8,.5);
           display: flex;
@@ -716,7 +713,7 @@
           line-height: 23px;
           margin-bottom: 17px;
         }
-        #main-newstand header .bold {
+        .left-section .bold {
           font-weight: bold;
           color:black;
         }
@@ -812,13 +809,13 @@
           background-color: #d3d5d7;
           background-color: var(--color_dot_divider);
         }
-        #main-newstand a {
+        .left-section a {
           text-decoration: none;
         }
-        #main-newstand a:visited {
+        .left-section a:visited {
           color:inherit;
         }
-        #main-newstand a:hover{
+        .left-section a:hover{
           text-decoration: underline;
         }
         #main-newstand-grid {
@@ -843,7 +840,7 @@
           border: 1px solid var(--color_border_in); /* 내부 경계선 */
           box-sizing: border-box; /* 박스 크기 포함 경계선 */
         }
-        #main-newstand footer {
+        .left-section footer {
           border-top: 1px solid var(--color_border_in);
           padding: 10px 0 11px;
           font-size: 1.3rem;
@@ -855,7 +852,7 @@
           justify-content: center;
           position: relative;
         }
-        #main-newstand footer .prev, #main-newstand footer .next {
+        .left-section footer .prev, .left-section footer .next {
           background: none;
           border: none;
           content: "";
@@ -871,7 +868,7 @@
           border-radius: 50%;
           cursor: pointer;
         }
-        #main-newstand footer .prev::before{
+        .left-section footer .prev::before{
           content: "";
           display: block;
           position: absolute;
@@ -888,7 +885,7 @@
           margin: auto;
           transform: rotate(180deg);
         }
-        #main-newstand footer .next::before {
+        .left-section footer .next::before {
           content: "";
           display: block;
           position: absolute;
@@ -904,9 +901,12 @@
           height: 12px;
           margin: auto;
         }
-        #main-newstand footer .text {
+        .left-section footer .text {
           padding: 0 16px;
-          width: 156px;
+          min-width: 156px;
+        }
+        .left-section footer .hot {
+          color: #9858f5;
         }
         /* 현재 네이버에는 해당 아이콘이 없어져서 background-position 을 줄 수 없기에 주석처리
         #main-newstand footer .list, #main-newstand footer .grid {
@@ -925,14 +925,36 @@
           right: 0;
           padding: 18px 20px 18px 9px;
         }  */
-        #main-newstand footer .news {
+        .left-section .news {
           color: var(--color_news);
+        }
+        #main-shopping {
+          height: 560px;
+          display: flex;
+          flex-flow: column;
+        }
+        #main-shopping footer .text {
+          min-width: 176px;
+        }
+        #main-shopping-gray {
+          display: flex;
+        }
+        #main-shopping-gray .left {
+          width: 668px;
+          height: 50px;
+          padding: 15px 20px 14px;
+          display: flex;
+          background-color: var(--color_option_bg);
+        }
+        #main-shopping-gray .right {
+          margin-left: auto;
+          padding: 10px 0;
         }
       </style>
       <main id="main">
         <div id="main-left">
           <aside id="main-left-ad"></aside>
-          <section id="main-newstand">
+          <section id="main-newstand" class="left-section">
             <div id="main-newstand-top">
               <header>
                 <a href="#" class="bold">뉴스스탠드</a>
@@ -983,12 +1005,34 @@
               </div>
             </div>
             <footer>
-              <button class="prev"><span class="blind">이전</span></button>
+              <button class="prev"><span class="blind">이전페이지</span></button>
               <div class="text"><span class="news">언론사</span>&nbsp;더보기&nbsp;1/4</div>
-              <button class="next"><span class="blind">다음</span></button>
+              <button class="next"><span class="blind">다음페이지</span></button>
             </footer>
           </section>
-          <section id="main-shopping"></section>
+          <section id="main-shopping" class="left-section">
+            <div id="main-shopping-top">
+              <header>
+                <a href="#" class="bold">쇼핑</a>
+                <a href="#" class="slash">맨즈</a>
+                <a href="#" class="slash">원쁠딜</a>
+                <a href="#" class="slash">쇼핑라이브</a>
+              </header>
+              <div id="main-shopping-gray">
+                <div class="left">
+                  <a href="#">오늘의 혜택</a>
+                  <div>
+                    <a href="#">하루만에 바로받네~ 오늘 주문 내일 도착! 11번가 슈퍼배송</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer>
+              <button class="prev"><span class="blind">이전페이지</span></button>
+              <div class="text"><span class="hot">쇼핑핫아이템</span>&nbsp;더보기&nbsp;1/18</div>
+              <button class="next"><span class="blind">다음페이지</span></button>
+            </footer>
+          </section>
         </div>
         <div id="main-right">
           <section id="main-login">
