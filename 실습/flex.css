@@ -1,0 +1,29 @@
+.flex-container {
+  display: flex;
+  justify-content: space-around;    /* 수평방향 간격 설정 */
+  align-items: center;  /* 수직방향정렬 */
+  flex-wrap: wrap;  
+  background-color: aliceblue;
+  padding: 20px;
+}
+
+.flex-item {
+  flex: 1 1 calc(33.33% - 60px);  /* flex-glow  flex-shrink  flex-basic */  
+  background-color: blue;
+  color: red;
+  padding: 20px;
+  text-align: center;
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .flex-item {
+    flex: 1 1 calc(50% - 60px);
+  }
+}
+
+@media (max-width: 480px) {
+  .flex-item {
+    flex: 1 1 calc(100%);
+  }
+}

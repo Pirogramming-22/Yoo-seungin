@@ -1,0 +1,44 @@
+.nav-container {
+  position: relative;
+}
+
+.hamburger {
+  display: none;
+  background: #333;
+  color: aliceblue;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 10px;
+  background: #444;
+  padding: 10px;
+}
+
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: #444;
+    width: 100%;
+  }
+
+  .nav-menu.show {
+    display: flex;
+  }
+}
