@@ -6,6 +6,11 @@ body {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,10 +25,12 @@ header {
 }
 
 .header-menu {
-  margin-right: 363px;
+  margin-right: -93px;
 }
 
 .header-menu a {
+  display: inline-block;
+  transition: transform 0.2s ease;
   margin: 0 10px;
   text-decoration: none;
   color: #fff;
@@ -33,19 +40,19 @@ header {
     "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
     "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     sans-serif;
-  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.header-menu a:hover {
+  transform: translateY(-3px);
 }
 
 .header-menu a:nth-child(3) {
   color: #08EC12;
 }
 
-.header-menu a:hover {
-  transform: translateY(-3px); /
-}
-
 main {
   padding: 20px;
+  margin-top: 80px;
 }
 
 .batch-section {
@@ -198,6 +205,20 @@ footer {
   min-height: 120px
 }
 
+.footer-left p, 
+.footer-icons img, 
+.footer-gmail {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.footer-left p:hover, 
+.footer-icons img:hover, 
+.footer-gmail:hover {
+  transform: translateY(-3px);
+}
+
+
 .footer-left {
   display: flex;
   flex-direction: column; 
@@ -238,6 +259,17 @@ footer {
   ;
 }
 
+.footer-gmail img,
+.footer-gmail p {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.footer-gmail:hover img,
+.footer-gmail:hover p {
+  transform: translateY(-3px);
+}
+
 .footer-gmail {
   display: flex;
   align-items: center;
@@ -274,4 +306,137 @@ footer {
   background-color: #333333;
   text-align: center;
   color: white;
+}
+
+@media (max-width: 800px) {
+  .header-logo img {
+    margin-left: 20px;
+  }
+
+  .header-menu {
+    display: none;
+  }
+
+  .hamburger-icon {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    margin-right: 40px;
+  }
+
+  .hamburger-icon div {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+  }
+
+  .hamburger-icon div:first-child {
+    width: 50%;
+  }
+
+  .hamburger-icon div:last-child {
+    width: 80%;
+  }
+
+  .batch-section {
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .batch-section h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .batch-section a {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0;
+  }
+
+  .batch-section img {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .portfolio-card {
+    width: 85%;
+    min-height: 320px;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+  }
+
+  .portfolio-card img {
+    width: 45%;
+    height: auto;
+    margin: 15px 0;
+    object-fit: contain;
+  }
+
+  .portfolio-info {
+    width: 100%;
+    text-align: center;
+  }
+
+  .portfolio-info h3 {
+    margin-top: 10px;
+  }
+
+  .team {
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  .menu-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-left {
+    margin: 0;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-left p {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .footer-icons {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+  }
+
+  .footer-gmail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-menu {
+    display: none;
+  }
 }
