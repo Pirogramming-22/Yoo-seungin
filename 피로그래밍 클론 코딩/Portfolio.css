@@ -308,6 +308,34 @@ footer {
   color: white;
 }
 
+@media (max-width: 1680px) {
+  .header-logo img {
+    margin-left: 240px;
+  }
+}
+
+
+@media (max-width: 1150px) {
+  .batch-section h2 a,
+  .batch-section h2 img {
+    display: none;
+  }
+  
+  .batch-section h2 {
+    margin: 0;
+    text-align: center;
+  }
+
+  .header-logo img {
+    margin-left: 40px;
+  }
+
+  .portfolio-card {
+    width: 90%;
+  }
+}
+
+
 @media (max-width: 800px) {
   .header-logo img {
     margin-left: 20px;
@@ -325,7 +353,7 @@ footer {
     width: 30px;
     height: 22px;
     cursor: pointer;
-    margin-right: 40px;
+    margin-right: 50px;
   }
 
   .hamburger-icon div {
