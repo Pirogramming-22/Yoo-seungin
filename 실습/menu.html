@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="menu.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="nav-container">
+    <button class="hamburger">☰</button>
+    <nav class="nav-menu">
+      <a href="#">HOME</a>
+      <a href="#">ABOUT</a>
+      <a href="#">SERVICE</a>
+      <a href="#">CONTACT</a>
+    </nav>
+  </div>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+    })
+    /** classList.toggle() 특정한 클래스를 추가하거나 제거하기 가능 
+     * classList.toggle('show') show라는 클래스를 추가
+     * 이미 show클래스가 있을 때에는 toggle을 한 번 더 하면 show 클래스 제거 **/
+  </script>
+</body>
+</html>
