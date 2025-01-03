@@ -15,6 +15,8 @@ while num < 31:
         num += 1
         print(f"playerA : {num}")
         if num >= 31:
+            print("=========================================================")
+            print("playerB win!")
             break
 
     while True:
@@ -31,4 +33,6 @@ while num < 31:
         num += 1
         print(f"playerB : {num}")
         if num >= 31:
+            print("==========================================================")
+            print("playerA win!")
             break
