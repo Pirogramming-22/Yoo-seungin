@@ -1,38 +1,34 @@
-num = 0
+import random as r
 
-while num < 31:
-    while True:
-        try:
-            user_input = int(input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) : ")) 
-            if user_input not in [1, 2, 3]:
-                print("1, 2, 3 중 하나를 입력하세요")
-                continue
-            break
-        except ValueError:
-            print("정수를 입력하세요")
+def brGame(player):
+    global num
+    if player == "computer":
+        user_input = r.randint(1,3)
+    else:
+        while True:
+            try:
+                user_input = int(input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) : "))
+                if user_input not in [1, 2, 3]:
+                    print("1, 2, 3 중 하나를 입력하세요")
+                    continue
+                break
+            except ValueError:
+                print("정수를 입력하세요")
 
     for i in range(1, user_input+1):
         num += 1
-        print(f"playerA : {num}")
+        print(f"{player} : {num}")
         if num >= 31:
-            print("=========================================================")
-            print("playerB win!")
-            break
+            print("=======================================================================")
+            print(f"{'player' if player == 'computer' else 'computer'} win!")
+            return True
+    return False
 
-    while True:
-        try:
-            user_input2 = int(input("부를 숫자의 개수를 입력하세요(1, 2, 3만 입력 가능) : ")) 
-            if user_input2 not in [1, 2, 3]:
-                print("1, 2, 3 중 하나를 입력하세요")
-                continue
-            break
-        except ValueError:
-            print("정수를 입력하세요")
+num = 0
 
-    for i in range(1, user_input2+1):
-        num += 1
-        print(f"playerB : {num}")
-        if num >= 31:
-            print("==========================================================")
-            print("playerA win!")
-            break
+while num < 31:
+    if brGame("computer"):
+        break
+    if brGame("player"):
+        break
+
