@@ -37,9 +37,9 @@ class ReviewCreateView(View): # 리뷰 작성
         })
 
     def post(self, request): # post 요청 처리 
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
-            review = form.save()
+            form.save()
             return redirect('review_list')
         return render(request, 'reviews/review_form.html', {
             'form': form
