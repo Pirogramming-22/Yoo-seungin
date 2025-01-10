@@ -5,21 +5,40 @@
     .review-detail {
         max-width: 800px;
         margin: 2rem auto;
-        padding: 2rem;
+        padding: 2.5rem;
         background: white;
-        border-radius: 8px;
+        border-radius: 12px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .review-detail h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 1rem;
     }
     .movie-info {
         background: #f8f8f8;
-        padding: 1.5rem;
-        border-radius: 8px;
+        padding: 2rem;
+        border-radius: 12px;
         margin-bottom: 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     .movie-info p {
-        margin: 0.8rem 0;
+        margin: 1rem 0;
         font-size: 1.1rem;
         color: #444;
+        line-height: 1.6;
+    }
+    .thumbnail {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: block;
+        margin: 0 auto 1.5rem;
     }
     .review-content {
         line-height: 1.8;
@@ -30,24 +49,29 @@
         margin-bottom: 2rem;
         border: 1px solid #eee;
     }
-    .thumbnail {
-        width: 300px;
+    .review-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin: 0;
     }
     .action-buttons {
         display: flex;
         justify-content: center;
-        gap: 1rem;
-        margin-top: 2rem;
+        gap: 1.5rem;
+        margin-top: 2.5rem;
     }
     .btn {
-        padding: 0.8rem 2rem;
-        border-radius: 4px;
+        padding: 1rem 2.5rem;
+        border-radius: 6px;
         text-decoration: none;
         font-weight: bold;
         transition: all 0.3s ease;
+        font-size: 1.1rem;
+        border: 2px solid #663399;
     }
     .btn:hover {
         transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .delete-btn {
         background-color: #ff4757;
@@ -55,6 +79,10 @@
         border: none;
         cursor: pointer;
     }
+    .delete-btn:hover {
+        background-color: #ff3344;
+    }
+    
     .delete-form {
         display: inline;
     }

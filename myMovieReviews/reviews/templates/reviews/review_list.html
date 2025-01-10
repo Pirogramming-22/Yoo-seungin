@@ -20,6 +20,15 @@
         color: #663399;
         margin: 0.5rem 0;
     }
+    .review-title a {
+        text-decoration: none; 
+        color: #663399; 
+        font-weight: bold;
+        transition: color 0.3s; 
+    }
+    .review-title a:hover {
+        color: #ff1493;
+    }
     
     .no-thumbnail {
         width: 100%;
@@ -49,7 +58,7 @@
         {% else %}
         <div class="no-thumbnail">No Image</div>
         {% endif %}
-        <h2><a href="{% url 'review_detail' review.pk %}">{{ review.title }}</a></h2>
+        <h2 class="review-title"><a href="{% url 'review_detail' review.pk %}">{{ review.title }}</a></h2>
         <div class="review-info">
             <p>개봉년도: {{ review.release_year }}년</p>
             <p>장르: {{ review.get_genre_display }}</p>
