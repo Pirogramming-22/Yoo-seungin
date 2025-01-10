@@ -30,6 +30,9 @@
         margin-bottom: 2rem;
         border: 1px solid #eee;
     }
+    .thumbnail {
+        width: 300px;
+    }
     .action-buttons {
         display: flex;
         justify-content: center;
@@ -60,7 +63,7 @@
     <h1>{{ review.title }}</h1>
     <div class="movie-info">
         {% if review.image %}
-        <img src="{{ review.image.url }}" alt="{{ review.title }}">
+        <img src="{{ review.image.url }}" alt="{{ review.title }}" class="thumbnail">
         {% endif %}
         <p>개봉년도: {{ review.release_year }}년</p>
         <p>감독: {{ review.director }}</p>

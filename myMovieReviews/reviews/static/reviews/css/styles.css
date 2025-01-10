@@ -26,6 +26,15 @@ header {
   align-items: center;
 }
 
+.header-content a {
+  text-decoration: none;
+}
+
+.add-review-btn {
+  text-decoration: none;
+  color: #333;
+}
+
 h1 span {
   color: var(--primary-color);
 }
