@@ -31,6 +31,12 @@ class Review(models.Model):
         validators=[MinValueValidator(1)],
         verbose_name='러닝타임(분)'
     )
+    image = models.ImageField(  # 이미지 필드 추가
+        upload_to='review_images/',
+        null=True,
+        blank=True,
+        verbose_name='이미지'
+    )
     review_text = models.TextField(verbose_name='리뷰')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

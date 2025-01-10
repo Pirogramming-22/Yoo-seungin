@@ -59,6 +59,9 @@
 <div class="review-detail">
     <h1>{{ review.title }}</h1>
     <div class="movie-info">
+        {% if review.image %}
+        <img src="{{ review.image.url }}" alt="{{ review.title }}">
+        {% endif %}
         <p>개봉년도: {{ review.release_year }}년</p>
         <p>감독: {{ review.director }}</p>
         <p>주연: {{ review.actors }}</p>

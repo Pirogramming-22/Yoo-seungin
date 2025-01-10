@@ -3,7 +3,7 @@
 {% block content %}
 <div class="form-container">
     <h1>Movie review 🍿</h1>
-    <form method="post" class="review-form">
+    <form method="post" enctype="multipart/form-data" class="review-form">
         {% csrf_token %}
         {% for field in form %}
         <div class="form-group">
@@ -14,7 +14,33 @@
             {% endif %}
         </div>
         {% endfor %}
+        {% if review.image %}
+        <div class="form-group">
+            <img src="{{ review.image.url }}" alt="{{ review.title }}" style="max-width: 300px;">
+        </div>
+        {% else %}
+        <div class="form-group">
+            <p>이미지가 없습니다.</p>
+        </div>
+        {% endif %}
         <button type="submit" class="save-btn">Save</button>
     </form>
 </div>
 {% endblock %}
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = function(e) {
+            const preview = document.getElementById('image-preview');
+            preview.src = e.target.result; 
+            preview.style.display = 'block';
+        };
+    
+        if (file) {
+            reader.readAsDataURL(file); 
+        }
+    }
+    </script>

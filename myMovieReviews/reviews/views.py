@@ -56,7 +56,7 @@ class ReviewUpdateView(View): # 리뷰 수정
 
     def post(self, request, pk):
         review = get_object_or_404(Review, pk=pk)
-        form = ReviewForm(request.POST, instance=review)
+        form = ReviewForm(request.POST, request.FILES, instance=review)
         if form.is_valid():
             review = form.save()
             return redirect('review_detail', pk=review.pk)
@@ -91,3 +91,13 @@ def review_list(request): # 리뷰 리스트 페이지
         'reviews': reviews
     }
     return render(request, 'reviews/review_list.html', context)
+
+def review_create(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, request.FILES)  
+        if form.is_valid():
+            form.save()
+            return redirect('review_list')
+    else:
+        form = ReviewForm()
+    return render(request, 'reviews/review_form.html', {'form': form})

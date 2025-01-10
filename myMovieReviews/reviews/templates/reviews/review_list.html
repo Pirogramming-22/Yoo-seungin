@@ -1,6 +1,27 @@
 {% extends 'reviews/base.html' %}
 
 {% block content %}
+<style>
+    .review-thumbnail {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .no-thumbnail {
+        width: 100%;
+        height: 150px;
+        background-color: #f0f0f0;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #888;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+</style>
 <div class="sort-options">
     <a href="?sort=title">제목순</a>
     <a href="?sort=rating">별점순</a>
@@ -10,6 +31,11 @@
 <div class="review-grid">
     {% for review in reviews %}
     <div class="review-card">
+        {% if review.image %}
+        <img src="{{ review.image.url }}" alt="{{ review.title }}" class="review-thumbnail">
+        {% else %}
+        <div class="no-thumbnail">No Image</div>
+        {% endif %}
         <h2><a href="{% url 'review_detail' review.pk %}">{{ review.title }}</a></h2>
         <div class="review-info">
             <p>개봉년도: {{ review.release_year }}년</p>
