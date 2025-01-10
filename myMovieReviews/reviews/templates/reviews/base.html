@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>my Movie reviews</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'reviews/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1><a href="{% url 'review_list' %}">my<span>Movie</span>reviews</a></h1>
+            <a href="{% url 'review_create' %}" class="add-review-btn">Add a New review</a>
+        </div>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
