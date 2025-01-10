@@ -4,11 +4,23 @@
 <style>
     .review-thumbnail {
         width: 100%;
+        max-width: 100%;
         height: auto;
         border-radius: 8px;
         margin-bottom: 1rem;
+        max-height: 150px; 
+        object-fit: contain;
     }
-
+    .review-info {
+        flex-grow: 1; 
+    }
+    .review-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #663399;
+        margin: 0.5rem 0;
+    }
+    
     .no-thumbnail {
         width: 100%;
         height: 150px;
@@ -20,6 +32,7 @@
         color: #888;
         font-size: 0.9rem;
         margin-bottom: 1rem;
+        border: 1px dashed #ddd;
     }
 </style>
 <div class="sort-options">
