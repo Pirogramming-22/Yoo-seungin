@@ -1,6 +1,61 @@
 {% extends 'reviews/base.html' %}
 
 {% block content %}
+<style>
+    .review-detail {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .movie-info {
+        background: #f8f8f8;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+    .movie-info p {
+        margin: 0.8rem 0;
+        font-size: 1.1rem;
+        color: #444;
+    }
+    .review-content {
+        line-height: 1.8;
+        color: #333;
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        border: 1px solid #eee;
+    }
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    .btn {
+        padding: 0.8rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+    .delete-btn {
+        background-color: #ff4757;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .delete-form {
+        display: inline;
+    }
+</style>
 <div class="review-detail">
     <h1>{{ review.title }}</h1>
     <div class="movie-info">
