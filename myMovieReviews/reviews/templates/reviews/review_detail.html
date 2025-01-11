@@ -1,0 +1,116 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<style>
+    .review-detail {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2.5rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .review-detail h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 1rem;
+    }
+    .movie-info {
+        background: #f8f8f8;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .movie-info p {
+        margin: 1rem 0;
+        font-size: 1.1rem;
+        color: #444;
+        line-height: 1.6;
+    }
+    .thumbnail {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: block;
+        margin: 0 auto 1.5rem;
+    }
+    .review-content {
+        line-height: 1.8;
+        color: #333;
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        border: 1px solid #eee;
+    }
+    .review-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin: 0;
+    }
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+    }
+    .btn {
+        padding: 1rem 2.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        border: 2px solid #663399;
+    }
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .delete-btn {
+        background-color: #ff4757;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .delete-btn:hover {
+        background-color: #ff3344;
+    }
+    
+    .delete-form {
+        display: inline;
+    }
+</style>
+<div class="review-detail">
+    <h1>{{ review.title }}</h1>
+    <div class="movie-info">
+        {% if review.image %}
+        <img src="{{ review.image.url }}" alt="{{ review.title }}" class="thumbnail">
+        {% endif %}
+        <p>개봉년도: {{ review.release_year }}년</p>
+        <p>감독: {{ review.director }}</p>
+        <p>주연: {{ review.actors }}</p>
+        <p>장르: {{ review.get_genre_display }}</p>
+        <p>별점: {{ review.rating }}</p>
+        <p>러닝타임: {{ review.get_running_time_display }}</p>
+    </div>
+    
+    <div class="review-content">
+        <p>{{ review.review_text|linebreaks }}</p>
+    </div>
+    
+    <div class="action-buttons">
+        <a href="{% url 'review_update' review.pk %}" class="btn">수정</a>
+        <form action="{% url 'review_delete' review.pk %}" method="post" class="delete-form">
+            {% csrf_token %}
+            <button type="submit" class="btn delete-btn">삭제</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
