@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="devtool-form-container">
+    <h2>DevTool 등록</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_name">이름</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="id_kind">종류</label>
+            {{ form.kind }}
+        </div>
+        <div class="form-group">
+            <label for="id_content">설명</label>
+            {{ form.content }}
+        </div>
+        <button type="submit" class="submit-btn">등록</button>
+    </form>
+</div>
+{% endblock %}

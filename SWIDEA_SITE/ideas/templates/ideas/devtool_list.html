@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="devtool-container">
+    <h2>DevTool List</h2>
+    <div class="devtool-list">
+        {% for tool in devtools %}
+        <div class="tool-row">
+            <div class="tool-name">{{ tool.name }}</div>
+            <div class="tool-description">{{ tool.kind }}</div>
+            <p>{{ tool.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="page-item">◀</span>
+        <span class="page-number">1</span>
+        <span class="page-item">▶</span>
+    </div>
+</div>
+{% endblock %}
