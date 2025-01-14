@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>아이디어 사이트 구현하기</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ideas/css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">My SW Idea Manage</div>
+        <div class="nav-links">
+            <a href="{% url 'ideas:idea_create' %}">아이디어 등록</a>
+            <a href="{% url 'ideas:idea_list' %}">아이디어 관리</a>
+            <a href="{% url 'ideas:devtool_create' %}">개발툴 등록</a>
+            <a href="{% url 'ideas:devtool_list' %}">개발툴 관리</a>
+        </div>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

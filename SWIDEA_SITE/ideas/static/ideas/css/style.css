@@ -1,0 +1,61 @@
+:root {
+  --bg-dark: rgba(40, 44, 52, 0.95);
+  --text-green: #00ff00;
+  --text-white: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+  background: #000;
+  color: var(--text-white);
+}
+
+.navbar {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.nav-brand {
+  color: var(--text-green);
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: var(--text-white);
+  text-decoration: none;
+  margin-left: 1.5rem;
+}
+
+.nav-links a:hover {
+  color: var(--text-green);
+}
+
+.idea-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.sort-options {
+  margin-bottom: 2rem;
+}
+
+.sort-btn {
+  color: var(--text-white);
+  text-decoration: none;
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--text-green);
+  border-radius: 4px;
+}
+
+.sort-btn.active {
+  background: var(--text-green);
+  color: #000;
+}
