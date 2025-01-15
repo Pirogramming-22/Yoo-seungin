@@ -4,8 +4,6 @@ from django.db.models import Count
 from .models import Idea, DevTool
 from .forms import IdeaForm, DevToolForm
 from django.http import JsonResponse
-import json
-from django.contrib.auth.decorators import login_required
 
 def idea_list(request):
     sort_option = request.GET.get('sort', 'latest')
@@ -44,6 +42,24 @@ def idea_detail(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
     return render(request, 'ideas/idea_detail.html', {'idea': idea})
 
+def idea_delete(request, pk):
+    idea = get_object_or_404(Idea, pk=pk)
+    if request.method == 'POST':
+        idea.delete()
+        return redirect('ideas:idea_list')
+    return redirect('ideas:idea_detail', pk=pk)
+
+def idea_update(request, pk):
+    idea = get_object_or_404(Idea, pk=pk)
+    if request.method == 'POST':
+        form = IdeaForm(request.POST, request.FILES, instance=idea)
+        if form.is_valid():
+            idea = form.save()
+            return redirect('ideas:idea_detail', pk=idea.pk)
+    else:
+        form = IdeaForm(instance=idea)
+    return render(request, 'ideas/idea_form.html', {'form': form})
+
 def devtool_list(request):
     devtools = DevTool.objects.all().order_by('name')
     return render(request, 'ideas/devtool_list.html', {'devtools': devtools})
@@ -57,6 +73,10 @@ def devtool_create(request):
     else:
         form = DevToolForm()
     return render(request, 'ideas/devtool_form.html', {'form': form})
+
+def devtool_detail(request, pk):
+    devtool = get_object_or_404(DevTool, pk=pk)
+    return render(request, 'ideas/devtool_detail.html', {'devtool': devtool})
 
 def toggle_star(request, pk):
     if request.method == "POST":

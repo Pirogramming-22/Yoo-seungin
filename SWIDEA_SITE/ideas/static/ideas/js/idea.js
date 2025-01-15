@@ -13,10 +13,11 @@ function toggleStar(btn, id) {
         return response.json();
     })
     .then(data => {
-        if (data['is_starred'])
+        if (data.is_starred) {
             btn.classList.add('starred');
-        else
+        } else {
             btn.classList.remove('starred');
+        }
     })
     .catch(error => {
         console.error("Error:", error);

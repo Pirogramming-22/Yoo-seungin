@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="detail-container">
+    <div class="detail-header">
+        <h2>{{ idea.title }}</h2>
+        <div class="star-container">
+            <button class="star-btn {% if request.user in idea.stars.all %}starred{% endif %}"
+                    onclick="toggleStar(this, {{ idea.pk }})">★</button>
+        </div>
+    </div>
+
+    <div class="detail-content">
+        <div class="idea-image">
+            <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
+        </div>
+        
+        <div class="idea-info">
+            <p class="content">{{ idea.content }}</p>
+            <p class="devtool">
+                개발툴: <a href="{% url 'ideas:devtool_detail' idea.devtool.pk %}">{{ idea.devtool.name }}</a>
+            </p>
+            <p class="interest">관심도: {{ idea.interest }}</p>
+            <p class="created-at">등록일: {{ idea.created_at|date:"Y-m-d H:i" }}</p>
+        </div>
+
+        <div class="button-group">
+            <form action="{% url 'ideas:idea_delete' idea.pk %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+            </form>
+            <a href="{% url 'ideas:idea_update' idea.pk %}" class="update-btn">수정</a>
+            <a href="{% url 'ideas:idea_list' %}" class="list-btn">목록</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.star-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.star-btn.starred {
+    color: #ffff00;
+}
+
+.idea-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.idea-info {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-group button,
+.button-group a {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.delete-btn {
+    background: #ff4444;
+    color: white;
+}
+
+.update-btn {
+    background: #00ff00;
+    color: black;
+}
+
+.list-btn {
+    background: #666;
+    color: white;
+}
+</style>
+{% endblock %}

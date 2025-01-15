@@ -12,4 +12,7 @@ urlpatterns = [
     path('<int:pk>/star/', views.toggle_star, name='star_toggle'),
     path('<int:pk>/interestup/', views.interest_up, name='interest_up'),
     path('<int:pk>/interestdown/', views.interest_down, name='interest_down'),
+    path('idea/<int:pk>/delete/', views.idea_delete, name='idea_delete'),
+    path('idea/<int:pk>/update/', views.idea_update, name='idea_update'),
+    path('devtool/<int:pk>/', views.devtool_detail, name='devtool_detail'),
 ]
