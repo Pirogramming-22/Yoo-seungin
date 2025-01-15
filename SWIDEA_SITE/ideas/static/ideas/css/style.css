@@ -12,20 +12,6 @@ body {
   color: var(--text-white);
 }
 
-.navbar {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(0, 255, 0, 0.3);
-}
-
-.nav-brand {
-  color: var(--text-green);
-  font-weight: bold;
-}
-
 .nav-links a {
   color: var(--text-white);
   text-decoration: none;
@@ -103,23 +89,91 @@ body {
   border-radius: 8px;
 }
 
+.idea-form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(30, 30, 30, 0.9);
+  border-radius: 8px;
+}
+
+.idea-form-container h2 {
+  color: var(--text-green);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
 .form-group {
   margin-bottom: 1.5rem;
 }
 
 .form-group label {
   display: block;
-  color: #00ff00;
+  color: var(--text-green);
   margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
-.form-control {
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
   width: 100%;
-  padding: 0.8rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid #00ff00;
-  color: #ffffff;
+  max-width: 600px;
+  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--text-green);
+  color: var(--text-white);
   border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+
+.form-group textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+
+.form-group select {
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+  background-size: 1rem auto;
+  padding-right: 2rem;
+}
+
+
+.form-group select option {
+  background: rgba(30, 30, 30, 0.95);
+  color: var(--text-white);
+  padding: 0.5rem;
+}
+
+
+.form-group input[type="file"] {
+  border: 1px dashed var(--text-green);
+  padding: 1rem;
+  width: 100%;
+  max-width: 600px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background: var(--text-green);
+  color: #000;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+  margin: 2rem auto 0;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background: #00cc00;
 }
 
 .submit-btn {

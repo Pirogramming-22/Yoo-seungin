@@ -3,7 +3,11 @@
 
 {% block content %}
 <div class="idea-container">
-    <h2>정렬 기준</h2>
+    <div class="idea-list-header">
+        <h1>Idea List</h1>
+        <p>나의 아이디어를 잊지 말고 기록해보세요</p>
+    </div>
+    <h3>정렬 기준</h3>
     
     <div class="sort-options">
         <a href="?sort=latest" class="sort-btn {% if sort_option == 'latest' %}active{% endif %}">최신순</a>
@@ -12,59 +16,79 @@
         <a href="?sort=created" class="sort-btn {% if sort_option == 'created' %}active{% endif %}">등록순</a>
     </div>
 
-    <div class="idea-grid">
-        <h2>Idea List</h2>
-        <p>나의 아이디어를 잊지 말고 기록해보세요</p>
-        {% for idea in ideas %}
-        <div class="idea-card">
-            <div class="idea-image">
-                <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
-                <button class="star-btn {% if request.user in idea.stars.all %}starred{% endif %}" 
-                        onclick="toggleStar(this, {{ idea.pk }})">★</button>
-            </div>
-            <div class="idea-content">
-                <h3><a href="{% url 'ideas:idea_detail' idea.pk %}">{{ idea.title }}</a></h3>
-                <p>예상 개발 툴: {{ idea.devtool.name }}</p>
-                <div class="interest-control">
-                    <p>아이디어 관심도</p>
-                    <button onclick="interestDown({{ idea.pk }})">-</button>
-                    <span class="interest-value-{{ idea.pk }}">{{ idea.interest }}</span>
-                    <button onclick="interestUp({{ idea.pk }})">+</button>
+    <div class="idea-grid-container">
+        <div class="idea-grid">
+            {% for idea in ideas %}
+            <div class="idea-card">
+                <div class="idea-image">
+                    <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
+                    <button class="star-btn {% if request.user in idea.stars.all %}starred{% endif %}" 
+                            onclick="toggleStar(this, {{ idea.pk }})">★</button>
+                </div>
+                <div class="idea-content">
+                    <h3><a href="{% url 'ideas:idea_detail' idea.pk %}">{{ idea.title }}</a></h3>
+                    <p>예상 개발 툴: {{ idea.devtool.name }}</p>
+                    <div class="interest-control">
+                        <p>아이디어 관심도</p>
+                        <button onclick="interestDown({{ idea.pk }})">-</button>
+                        <span class="interest-value-{{ idea.pk }}">{{ idea.interest }}</span>
+                        <button onclick="interestUp({{ idea.pk }})">+</button>
+                    </div>
                 </div>
             </div>
+            {% empty %}
+            <p class="no-ideas">등록된 아이디어가 없습니다.</p>
+            {% endfor %}
         </div>
-        {% empty %}
-        <p class="no-ideas">등록된 아이디어가 없습니다.</p>
-        {% endfor %}
-    </div>
 
-    <div class="pagination">
-        {% if ideas.has_previous %}
-            <a href="?page={{ ideas.previous_page_number }}&sort={{ sort_option }}">◀</a>
-        {% endif %}
-        <span class="page-info">{{ ideas.number }} / {{ ideas.paginator.num_pages }}</span>
-        {% if ideas.has_next %}
-            <a href="?page={{ ideas.next_page_number }}&sort={{ sort_option }}">▶</a>
-        {% endif %}
+        <div class="pagination">
+            {% if ideas.has_previous %}
+                <a href="?page={{ ideas.previous_page_number }}&sort={{ sort_option }}">◀</a>
+            {% endif %}
+            <span class="page-info">{{ ideas.number }} / {{ ideas.paginator.num_pages }}</span>
+            {% if ideas.has_next %}
+                <a href="?page={{ ideas.next_page_number }}&sort={{ sort_option }}">▶</a>
+            {% endif %}
+        </div>
     </div>
 </div>
 
 <style>
 .idea-container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: rgba(50, 50, 50, 0.8);
+}
+
+.idea-list-header {
+    margin-bottom: 2rem;
+}
+
+.idea-list-header h2 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.idea-list-header p {
+    color: #888;
+}
+
+.idea-grid-container {
+    border-radius: 8px;
+    padding: 2rem;
+    position: relative;
 }
 
 .idea-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
-    margin: 20px 0;
+    margin-bottom: 3rem;
 }
 
 .idea-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: #a9a9a9;
     border-radius: 8px;
     overflow: hidden;
 }
@@ -76,7 +100,7 @@
 
 .idea-image img {
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -103,6 +127,11 @@
     padding: 15px;
 }
 
+.idea-content h3 a {
+    color: #00ff00;
+    text-decoration: none;
+}
+
 .interest-control {
     display: flex;
     align-items: center;
@@ -110,18 +139,20 @@
     margin-top: 10px;
 }
 
-.interest-btn {
-    background: #00ff00;
-    color: #000;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 15px;
-    cursor: pointer;
+.pagination {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
-.interest-value {
-    min-width: 30px;
-    text-align: center;
+.pagination a {
+    text-decoration: none;
+    color: #00ff00;
 }
 
 .sort-options {

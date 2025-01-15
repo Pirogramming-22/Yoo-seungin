@@ -32,8 +32,8 @@
                 {% csrf_token %}
                 <button type="submit" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
             </form>
-            <a href="{% url 'ideas:devtool_update' devtool.pk %}" class="update-btn">수정</a>
             <a href="{% url 'ideas:devtool_list' %}" class="list-btn">목록</a>
+            <a href="{% url 'ideas:devtool_update' devtool.pk %}" class="update-btn">수정</a>
         </div>
     </div>
 </div>
@@ -42,7 +42,9 @@
 .detail-container {
     max-width: 1200px;
     margin: 0 auto;
+    margin-top: 40px;
     padding: 20px;
+    background-color: rgba(50, 50, 50, 0.8);
 }
 
 .description {

@@ -3,28 +3,23 @@
 
 {% block content %}
 <div class="detail-container">
-    <div class="detail-header">
-        <div class="star-container">
+    <div class="detail-content">
+        <h2>Idea Detail</h2>
+        <p>아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.</p>
+        <div class="idea-image-container">
+            <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
             <button class="star-btn {% if request.user in idea.stars.all %}starred{% endif %}"
                     onclick="toggleStar(this, {{ idea.pk }})">★</button>
-        </div>
-    </div>
-
-    <div class="detail-content">
-      <h2>Idea Detail</h2>
-      <p>아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.</p>
-        <div class="idea-image">
-            <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
         </div>
         
         <div class="idea-info">
             <h2>{{ idea.title }}</h2>
-            <p class="content">{{ idea.content }}</p>
-            <p class="devtool">
-                예상 개발툴: <a href="{% url 'ideas:devtool_detail' idea.devtool.pk %}">{{ idea.devtool.name }}</a>
-            </p>
             <p class="interest">아이디어 관심도: {{ idea.interest }}</p>
+            <p class="devtool">
+                예상 개발툴: <span class="devtool-link">{{ idea.devtool.name }}</span>
+            </p>
             <p class="created-at">등록일: {{ idea.created_at|date:"Y-m-d H:i" }}</p>
+            <p class="content">아이디어 설명: {{ idea.content }}</p>
         </div>
 
         <div class="button-group">
@@ -32,8 +27,8 @@
                 {% csrf_token %}
                 <button type="submit" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
             </form>
-            <a href="{% url 'ideas:idea_update' idea.pk %}" class="update-btn">수정</a>
             <a href="{% url 'ideas:idea_list' %}" class="list-btn">목록</a>
+            <a href="{% url 'ideas:idea_update' idea.pk %}" class="update-btn">수정</a>
         </div>
     </div>
 </div>
@@ -42,33 +37,40 @@
 .detail-container {
     max-width: 800px;
     margin: 0 auto;
+    margin-top: 40px;
     padding: 20px;
+    background-color: rgba(50, 50, 50, 0.8);
 }
 
-.detail-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+.idea-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.idea-image-container img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 .star-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.8);
     font-size: 24px;
     cursor: pointer;
+    z-index: 10;
 }
 
 .star-btn.starred {
     color: #ffff00;
-}
-
-.idea-image img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
 }
 
 .idea-info {
@@ -76,6 +78,15 @@
     padding: 20px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+}
+
+.idea-info h2 {
+    color: #ffffcc;
+}
+
+.devtool-link {
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .button-group {

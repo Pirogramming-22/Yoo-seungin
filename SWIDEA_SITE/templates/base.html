@@ -9,7 +9,9 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">My SW Idea Manage</div>
+        <div class="nav-brand">
+            My <span class="highlight">SW Idea</span> Manage
+        </div>
         <div class="nav-links">
             <a href="{% url 'ideas:idea_create' %}">아이디어 등록</a>
             <a href="{% url 'ideas:idea_list' %}">아이디어 관리</a>
@@ -22,5 +24,32 @@
         {% endblock %}
     </main>
     <script src="{% static 'ideas/js/idea.js' %}"></script>
+<style>
+    .navbar {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+    }
+    .nav-brand {
+        color: var(--text-white);
+        font-weight: bold;
+        font-size: 24px;
+        margin-left: 50px;  
+    }
+    .nav-brand .highlight {
+        color: #ffffcc;  
+    }
+    .nav-links a {
+        color: var(--text-white);
+        text-decoration: none;
+        margin-left: 1.5rem;
+    }
+    .nav-links a:hover {
+        color: var(--text-green);
+    }
+</style>
 </body>
 </html>
