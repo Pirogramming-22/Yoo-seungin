@@ -3,12 +3,15 @@
 {% block content %}
 <div class="devtool-container">
     <h2>DevTool List</h2>
+    <p>개발툴 목록 페이지 입니다. 자신이 사용가능한 개발툴의 목록을 확인해 보세요.</p>
     <div class="devtool-list">
         {% for tool in devtools %}
         <div class="tool-row">
-            <div class="tool-name">{{ tool.name }}</div>
-            <div class="tool-description">{{ tool.kind }}</div>
-            <p>{{ tool.content }}</p>
+            <div class="tool-content">
+                <a href="{% url 'ideas:devtool_detail' tool.pk %}" class="tool-name">{{ tool.name }}</a>
+                <div class="tool-description">{{ tool.kind }}</div>
+                <p>{{ tool.content }}</p>
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -18,4 +21,16 @@
         <span class="page-item">▶</span>
     </div>
 </div>
+
+<style>
+.tool-name {
+    color: #00ff00;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tool-name:hover {
+    text-decoration: underline;
+}
+</style>
 {% endblock %}

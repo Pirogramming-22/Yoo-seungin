@@ -4,7 +4,6 @@
 {% block content %}
 <div class="detail-container">
     <div class="detail-header">
-        <h2>{{ idea.title }}</h2>
         <div class="star-container">
             <button class="star-btn {% if request.user in idea.stars.all %}starred{% endif %}"
                     onclick="toggleStar(this, {{ idea.pk }})">★</button>
@@ -12,16 +11,19 @@
     </div>
 
     <div class="detail-content">
+      <h2>Idea Detail</h2>
+      <p>아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.</p>
         <div class="idea-image">
             <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
         </div>
         
         <div class="idea-info">
+            <h2>{{ idea.title }}</h2>
             <p class="content">{{ idea.content }}</p>
             <p class="devtool">
-                개발툴: <a href="{% url 'ideas:devtool_detail' idea.devtool.pk %}">{{ idea.devtool.name }}</a>
+                예상 개발툴: <a href="{% url 'ideas:devtool_detail' idea.devtool.pk %}">{{ idea.devtool.name }}</a>
             </p>
-            <p class="interest">관심도: {{ idea.interest }}</p>
+            <p class="interest">아이디어 관심도: {{ idea.interest }}</p>
             <p class="created-at">등록일: {{ idea.created_at|date:"Y-m-d H:i" }}</p>
         </div>
 

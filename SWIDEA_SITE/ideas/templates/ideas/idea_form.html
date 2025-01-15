@@ -6,26 +6,26 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            <label>제목</label>
+            <label>아이디어명:</label>
             {{ form.title }}
         </div>
         <div class="form-group">
-            <label>이미지</label>
+            <label>image:</label>
             {{ form.image }}
         </div>
         <div class="form-group">
-            <label>내용</label>
+            <label>아이디어 설명:</label>
             {{ form.content }}
         </div>
         <div class="form-group">
-            <label>관심도</label>
+            <label>아이디어 관심도:</label>
             {{ form.interest }}
         </div>
         <div class="form-group">
-            <label>개발툴</label>
+            <label>예상 개발툴:</label>
             {{ form.devtool }}
         </div>
-        <button type="submit" class="submit-btn">등록하기</button>
+        <button type="submit" class="submit-btn">SUBMIT</button>
     </form>
 </div>
 {% endblock %}

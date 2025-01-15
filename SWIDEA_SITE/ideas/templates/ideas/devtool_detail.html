@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="detail-container">
+    <h2>DevTool Detail</h2>
+    <p class="description">개발툴 세부내용 페이지 입니다. 자신이 다룰 수 있는 개발툴에 대한 상세내용을 확인해 보아요.</p>
+
+    <div class="devtool-box">
+        <div class="devtool-header">
+            <h1>{{ devtool.name }}</h1>
+        </div>
+
+        <div class="devtool-info">
+            <p class="kind">{{ devtool.kind }}</p>
+            <p class="content">{{ devtool.content }}</p>
+        </div>
+
+        <div class="related-ideas">
+            <h3>만들 수 있는 SW 목록</h3>
+            {% for idea in related_ideas %}
+            <div class="idea-item">
+                <a href="{% url 'ideas:idea_detail' idea.pk %}">{{ idea.title }}</a>
+            </div>
+            {% empty %}
+            <p>이 개발툴을 사용한 아이디어가 없습니다.</p>
+            {% endfor %}
+        </div>
+
+        <div class="button-group">
+            <form action="{% url 'ideas:devtool_delete' devtool.pk %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+            </form>
+            <a href="{% url 'ideas:devtool_update' devtool.pk %}" class="update-btn">수정</a>
+            <a href="{% url 'ideas:devtool_list' %}" class="list-btn">목록</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.description {
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.devtool-box {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.devtool-header h1 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.devtool-info {
+    margin: 20px 0;
+}
+
+.kind {
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.content {
+    color: #fff;
+    line-height: 1.6;
+}
+
+.related-ideas {
+    margin-top: 30px;
+}
+
+.related-ideas h3 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.idea-item {
+    margin: 10px 0;
+}
+
+.idea-item a {
+    color: #00ff00;
+    text-decoration: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.button-group button,
+.button-group a {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.delete-btn {
+    background: #ff4444;
+    color: white;
+}
+
+.update-btn {
+    background: #00ff00;
+    color: black;
+}
+
+.list-btn {
+    background: #666;
+    color: white;
+}
+</style>
+{% endblock %}

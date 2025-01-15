@@ -58,7 +58,10 @@ def idea_update(request, pk):
             return redirect('ideas:idea_detail', pk=idea.pk)
     else:
         form = IdeaForm(instance=idea)
-    return render(request, 'ideas/idea_form.html', {'form': form})
+    return render(request, 'ideas/idea_update.html', {  
+        'form': form,
+        'idea': idea  
+    })
 
 def devtool_list(request):
     devtools = DevTool.objects.all().order_by('name')
@@ -76,7 +79,32 @@ def devtool_create(request):
 
 def devtool_detail(request, pk):
     devtool = get_object_or_404(DevTool, pk=pk)
-    return render(request, 'ideas/devtool_detail.html', {'devtool': devtool})
+    related_ideas = Idea.objects.filter(devtool=devtool)
+    return render(request, 'ideas/devtool_detail.html', {
+        'devtool': devtool,
+        'related_ideas': related_ideas
+    })
+
+def devtool_update(request, pk):
+    devtool = get_object_or_404(DevTool, pk=pk)
+    if request.method == 'POST':
+        form = DevToolForm(request.POST, instance=devtool)
+        if form.is_valid():
+            devtool = form.save()
+            return redirect('ideas:devtool_detail', pk=devtool.pk)
+    else:
+        form = DevToolForm(instance=devtool)
+    return render(request, 'ideas/devtool_update.html', {
+        'form': form,
+        'devtool': devtool,
+        })
+
+def devtool_delete(request, pk):
+    devtool = get_object_or_404(DevTool, pk=pk)
+    if request.method == 'POST':
+        devtool.delete()
+        return redirect('ideas:devtool_list')
+    return redirect('ideas:devtool_detail', pk=pk)
 
 def toggle_star(request, pk):
     if request.method == "POST":

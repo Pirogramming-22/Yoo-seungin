@@ -2,7 +2,8 @@
 
 {% block content %}
 <div class="devtool-form-container">
-    <h2>DevTool 등록</h2>
+    <h2>DevTool Register</h2>
+    <p>개발툴 등록 페이지 입니다. 자신이 다룰 수 있는 개발툴을 등록해 보세요.</p>
     <form method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -14,7 +15,7 @@
             {{ form.kind }}
         </div>
         <div class="form-group">
-            <label for="id_content">설명</label>
+            <label for="id_content">개발툴 설명</label>
             {{ form.content }}
         </div>
         <button type="submit" class="submit-btn">등록</button>
