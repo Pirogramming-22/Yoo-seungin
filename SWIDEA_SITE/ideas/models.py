@@ -18,6 +18,12 @@ class Idea(models.Model):
     devtool = models.ForeignKey(DevTool, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    stars = models.ManyToManyField(User, through='IdeaStar', related_name='starred_ideas')
+    
     def __str__(self):
         return self.title
+    
+class IdeaStar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    idea = models.ForeignKey(Idea, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)

@@ -9,4 +9,7 @@ urlpatterns = [
     path('idea/<int:pk>/', views.idea_detail, name='idea_detail'),
     path('devtool/create/', views.devtool_create, name='devtool_create'),
     path('devtool/list/', views.devtool_list, name='devtool_list'),
+    path('<int:pk>/star/', views.toggle_star, name='star_toggle'),
+    path('<int:pk>/interestup/', views.interest_up, name='interest_up'),
+    path('<int:pk>/interestdown/', views.interest_down, name='interest_down'),
 ]

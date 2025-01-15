@@ -3,6 +3,9 @@ from django.core.paginator import Paginator
 from django.db.models import Count
 from .models import Idea, DevTool
 from .forms import IdeaForm, DevToolForm
+from django.http import JsonResponse
+import json
+from django.contrib.auth.decorators import login_required
 
 def idea_list(request):
     sort_option = request.GET.get('sort', 'latest')
@@ -54,3 +57,31 @@ def devtool_create(request):
     else:
         form = DevToolForm()
     return render(request, 'ideas/devtool_form.html', {'form': form})
+
+def toggle_star(request, pk):
+    if request.method == "POST":
+        idea = get_object_or_404(Idea, id=pk)
+        if request.user in idea.stars.all():
+            idea.stars.remove(request.user)
+            is_starred = False
+        else:
+            idea.stars.add(request.user)
+            is_starred = True
+        return JsonResponse({'is_starred': is_starred})
+    return JsonResponse({'error': "error"})
+
+def interest_up(request, pk):
+    if request.method == "POST":
+        idea = get_object_or_404(Idea, id=pk)
+        idea.interest += 1
+        idea.save()
+        return JsonResponse({'interest': idea.interest})
+    return JsonResponse({'error': "error"})
+
+def interest_down(request, pk):
+    if request.method == "POST":
+        idea = get_object_or_404(Idea, id=pk)
+        idea.interest = max(0, idea.interest - 1)
+        idea.save()
+        return JsonResponse({'interest': idea.interest})
+    return JsonResponse({'error': "error"})
