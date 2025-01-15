@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
-from django.db.models import Count
+from django.db.models import Count, Q
 from .models import Idea, DevTool
 from .forms import IdeaForm, DevToolForm
 from django.http import JsonResponse
+
 
 def idea_list(request):
     sort_option = request.GET.get('sort', 'latest')
@@ -133,3 +134,35 @@ def interest_down(request, pk):
         idea.save()
         return JsonResponse({'interest': idea.interest})
     return JsonResponse({'error': "error"})
+
+def idea_list(request):
+    sort_option = request.GET.get('sort', 'latest')
+    search_query = request.GET.get('search', '')
+    
+    ideas = Idea.objects.all()
+    
+    if search_query:
+        ideas = ideas.filter(
+            Q(title__icontains=search_query) |
+            Q(devtool__name__icontains=search_query)
+        )
+    
+    if sort_option == 'stars':
+        ideas = ideas.annotate(star_count=Count('stars')).order_by('-star_count')
+    elif sort_option == 'name':
+        ideas = ideas.order_by('title')
+    elif sort_option == 'created':
+        ideas = ideas.order_by('created_at')
+    else: 
+        ideas = ideas.order_by('-created_at')
+    
+    
+    paginator = Paginator(ideas, 4)
+    page = request.GET.get('page')
+    ideas = paginator.get_page(page)
+    
+    return render(request, 'ideas/idea_list.html', {
+        'ideas': ideas,
+        'sort_option': sort_option,
+        'search_query': search_query
+    })
