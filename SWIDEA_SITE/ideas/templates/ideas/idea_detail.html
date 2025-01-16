@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="detail-container">
+    <div class="detail-content">
+        <h2>Idea Detail</h2>
+        <p>아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.</p>
+        <div class="idea-image-container">
+            <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
+            <button class="star-btn {% if request.user in idea.stars.all %}starred{% endif %}"
+                    onclick="toggleStar(this, {{ idea.pk }})">★</button>
+        </div>
+        
+        <div class="idea-info">
+            <h2>{{ idea.title }}</h2>
+            <p class="interest">아이디어 관심도: {{ idea.interest }}</p>
+            <p class="devtool">
+                예상 개발툴: <span class="devtool-link">{{ idea.devtool.name }}</span>
+            </p>
+            <p class="created-at">등록일: {{ idea.created_at|date:"Y-m-d H:i" }}</p>
+            <p class="content">아이디어 설명: {{ idea.content }}</p>
+        </div>
+
+        <div class="button-group">
+            <form action="{% url 'ideas:idea_delete' idea.pk %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+            </form>
+            <a href="{% url 'ideas:idea_list' %}" class="list-btn">목록</a>
+            <a href="{% url 'ideas:idea_update' idea.pk %}" class="update-btn">수정</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(50, 50, 50, 0.8);
+}
+
+.idea-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;  
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.idea-image-container img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.star-btn {
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.star-btn.starred {
+    color: #ffff00;
+}
+
+.idea-info {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.idea-info h2 {
+    color: #ffffcc;
+}
+
+.devtool-link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-group button,
+.button-group a {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.delete-btn {
+    background: #ff4444;
+    color: white;
+}
+
+.update-btn {
+    background: #00ff00;
+    color: black;
+}
+
+.list-btn {
+    background: #666;
+    color: white;
+}
+</style>
+{% endblock %}

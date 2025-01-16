@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="devtool-form-container">
+    <h2>DevTool Register</h2>
+    <p>개발툴 등록 페이지 입니다. 자신이 다룰 수 있는 개발툴을 등록해 보세요.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_name">이름</label>
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            <label for="id_kind">종류</label>
+            {{ form.kind }}
+        </div>
+        <div class="form-group">
+            <label for="id_content">개발툴 설명</label>
+            {{ form.content }}
+        </div>
+        <button type="submit" class="submit-btn">SUBMIT</button>
+    </form>
+</div>
+{% endblock %}
