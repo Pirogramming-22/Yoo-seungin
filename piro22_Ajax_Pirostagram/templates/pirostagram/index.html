@@ -4,10 +4,14 @@
 {% block content %}
 <div class="container">
     <header class="header">
-        <button class="header__goBackButton">
-            <img src="{% static 'icons/goBack.svg' %}" alt="뒤로 가기 버튼">
-        </button>
-        <div class="header__username">Pirogramming</div>
+        <div class="header__left">
+            <a href="{% url 'pirostagram:index' %}" class="header__goBackButton">
+                <img src="{% static 'icons/goBack.svg' %}" alt="뒤로 가기 버튼">
+            </a>
+        </div>
+        <div class="header__center">
+            <div class="header__username">Pirogramming</div>
+        </div>
         <div class="header__rightButtons">
             <button class="header__alarmButton">
                 <img src="{% static 'icons/alarm.svg' %}" alt="알림 열기 버튼">
@@ -29,11 +33,11 @@
                     <div class="profile__data-type">Posts</div>
                 </div>
                 <div class="profile__data-item">
-                    <div class="profile__data-number">{{ follower_count }}</div>
+                    <div class="profile__data-number">1046</div>
                     <div class="profile__data-type">Followers</div>
                 </div>
                 <div class="profile__data-item">
-                    <div class="profile__data-number">{{ following_count }}</div>
+                    <div class="profile__data-number">0</div>
                     <div class="profile__data-type">Following</div>
                 </div>
             </div>
@@ -88,9 +92,9 @@
             <button class="footer__button">
                 <img src="{% static 'icons/add.svg' %}" alt="게시물 추가">
             </button>
-            <button class="footer__button">
-                <img src="{% static 'icons/like.svg' %}" alt="좋아요">
-            </button>
+            <a href="{% url 'logout' %}" class="footer__button">
+                <img src="{% static 'icons/logout.svg' %}" alt="로그아웃">
+            </a>
             <button class="footer__button">
                 <img src="{% static 'icons/profile.svg' %}" alt="프로필">
             </button>

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth import logout
 import json
 
 @login_required
@@ -20,8 +21,6 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     context = {
         'post': post,
-        'follower_count': 1046,
-        'following_count': 0,
     }
     return render(request, 'pirostagram/post_detail.html', context)
 
@@ -82,4 +81,8 @@ def delete_comment(request, comment_id):
             comment.delete()
             return JsonResponse({'success': True})
     return JsonResponse({'success': False})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 

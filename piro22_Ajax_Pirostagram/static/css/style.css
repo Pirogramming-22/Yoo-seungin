@@ -43,7 +43,6 @@
   font-weight: bold;
 }
 
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -58,6 +57,7 @@
 
 .header__username {
   font-size: var(--heading);
+  margin-left: 30px;
 }
 
 .highlights {
@@ -280,6 +280,33 @@ main {
   height: 24px;
 }
 
+.detail-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #262626;
+  gap: 20px; 
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.back-btn img {
+  filter: brightness(0) invert(1);  
+  width: 24px;
+  height: 24px;
+}
+
+.detail-title {
+  font-size: 1.8rem; 
+  color: white;
+  font-weight: bold;
+}
+
+
 
 .profile__data-number {
   font-weight: bold;
@@ -374,5 +401,19 @@ main {
   border: none;
   color: #0095f6;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.footer__nav {
+  display: flex;
+  justify-content: space-around;  
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #262626;
+}
+
+.footer__button {
+  background: none;
+  border: none;
   cursor: pointer;
 }
