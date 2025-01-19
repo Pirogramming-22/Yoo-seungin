@@ -1,0 +1,53 @@
+{% extends 'pirostagram/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="post-detail-container">
+    <header class="detail-header">
+        <button onclick="history.back()" class="back-btn">
+            <img src="{% static 'icons/goBack.svg' %}" alt="뒤로가기">
+        </button>
+        <h1>게시물</h1>
+    </header>
+
+    <div class="post-detail-content">
+        <div class="post-image-container">
+            <img src="{{ post.image.url }}" alt="게시물 이미지">
+        </div>
+        
+        <div class="post-actions">
+            <div class="like-section">
+                <button class="like-btn {% if request.user in post.likes.all %}active{% endif %}" 
+                        data-post-id="{{ post.id }}">
+                    {% if request.user in post.likes.all %}
+                        ❤️ 좋아요 {{ post.likes.count }}개
+                    {% else %}
+                        🤍 좋아요
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+        <div class="comments-section">
+          <div class="comments-container">
+              {% for comment in post.comments.all reversed %}
+              <div class="comment" id="comment-{{ comment.id }}">
+                  <span class="comment-content">
+                      <strong>{{ comment.author.username }}</strong> {{ comment.content }}
+                  </span>
+                  {% if user == comment.author %}
+                  <button class="delete-comment-btn" data-comment-id="{{ comment.id }}">삭제</button>
+                  {% endif %}
+              </div>
+              {% endfor %}
+          </div>
+          
+          <form class="comment-form">
+              {% csrf_token %}
+              <input type="text" name="content" placeholder="댓글 달기...">
+              <button type="submit" class="post-comment-btn">게시</button>
+          </form>
+      </div>
+        
+    </div>
+</div>
+{% endblock %}
