@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 import json
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.db.models import Count
 
 @login_required
 def index(request):
@@ -106,3 +107,20 @@ def search_users(request):
             
             return JsonResponse({'results': results})
     return JsonResponse({'results': []})
+
+@login_required
+def sort_posts(request):
+    sort_type = request.GET.get('sort_type', 'latest')
+    
+    if sort_type == 'latest':
+        posts = Post.objects.all().order_by('-created_at')
+    elif sort_type == 'comments':
+        posts = Post.objects.annotate(comment_count=Count('comments')).order_by('-comment_count')
+    
+    posts_data = [{
+        'id': post.id,
+        'image_url': post.image.url,
+        'comment_count': post.comments.count()
+    } for post in posts]
+    
+    return JsonResponse({'posts': posts_data})

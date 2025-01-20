@@ -10,4 +10,5 @@ urlpatterns = [
     path('post/<int:post_id>/comment/', views.add_comment, name='add_comment'),
     path('comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
     path('search/users/', views.search_users, name='search_users'),
+    path('sort-posts/', views.sort_posts, name='sort_posts'),
 ]

@@ -163,4 +163,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         });
     }
+    const sortBtn = document.getElementById('sort-btn');
+    const sortOptions = document.querySelector('.sort-options');
+
+    if (sortBtn && sortOptions) {
+        sortBtn.addEventListener('click', function() {
+            sortOptions.style.display = sortOptions.style.display === 'none' ? 'block' : 'none';
+        });
+
+    document.querySelectorAll('.sort-option').forEach(option => {
+        option.addEventListener('click', async function() {
+            const sortType = this.dataset.sort;
+            try {
+                const response = await fetch(`/sort-posts/?sort_type=${sortType}`);
+                const data = await response.json();
+                
+                const postsContainer = document.querySelector('.posts__contents');
+                postsContainer.innerHTML = data.posts.map(post => `
+                    <div class="posts__photo" data-post-id="${post.id}">
+                        <img src="${post.image_url}" alt="포스트 이미지">
+                    </div>
+                `).join('');
+
+                sortOptions.style.display = 'none';
+                
+                attachPostClickEvents();
+            } catch (error) {
+                console.error('정렬 오류:', error);
+            }
+        });
+    });
+}
+
+
+function attachPostClickEvents() {
+    document.querySelectorAll('.posts__photo').forEach(post => {
+        post.addEventListener('click', function() {
+            const postId = this.getAttribute('data-post-id');
+            if (postId) {
+                window.location.href = `/post/${postId}/`;
+            }
+        });
+    });
+}
 });
