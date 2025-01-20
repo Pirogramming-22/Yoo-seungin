@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
 import json
+from django.db.models import Q
+from django.contrib.auth.models import User
 
 @login_required
 def index(request):
@@ -86,3 +88,21 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+def search_users(request):
+    if request.method == 'GET':
+        query = request.GET.get('q', '')
+        if query:
+            users = User.objects.filter(
+                Q(username__icontains=query) |
+                Q(profile__bio__icontains=query)
+            )[:5]  
+            
+            results = [{
+                'id': user.id,
+                'username': user.username,
+                'profile_pic': user.profile.profile_pic.url if hasattr(user, 'profile') else None,
+                'bio': user.profile.bio if hasattr(user, 'profile') else ''
+            } for user in users]
+            
+            return JsonResponse({'results': results})
+    return JsonResponse({'results': []})

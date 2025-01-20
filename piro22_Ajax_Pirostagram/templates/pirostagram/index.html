@@ -83,10 +83,10 @@
 
     <footer class="footer">
         <nav class="footer__nav">
-            <button class="footer__button">
+            <a href="{% url 'pirostagram:index' %}" class="footer__button">
                 <img src="{% static 'icons/home.svg' %}" alt="홈">
-            </button>
-            <button class="footer__button">
+            </a>
+            <button class="footer__button" id="search-btn">
                 <img src="{% static 'icons/search.svg' %}" alt="검색">
             </button>
             <button class="footer__button">
@@ -100,5 +100,17 @@
             </button>
         </nav>
     </footer>
+    
+    <div class="search-overlay" style="display: none;">
+        <header class="search-header">
+            <button class="back-btn" id="close-search">
+                <img src="{% static 'icons/goBack.svg' %}" alt="뒤로가기">
+            </button>
+            <div class="search-input-wrapper">
+                <input type="text" id="search-input" placeholder="유저 이름을 검색하세요" autocomplete="off">
+            </div>
+        </header>
+        <div class="search-results"></div>
+    </div>
 </div>
 {% endblock %}

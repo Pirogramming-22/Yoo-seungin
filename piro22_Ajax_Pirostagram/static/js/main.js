@@ -29,7 +29,6 @@ function addDeleteEventListener(button) {
     });
 }
 
-// 게시물 클릭 시 상세 페이지로 이동
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.posts__photo').forEach(post => {
         post.addEventListener('click', function() {
@@ -98,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     commentsContainer.insertAdjacentHTML('afterbegin', newComment);
                     this.reset();
                     
-                    
                     const newDeleteBtn = document.querySelector(`#comment-${data.comment_id} .delete-comment-btn`);
                     addDeleteEventListener(newDeleteBtn);
                 }
@@ -108,7 +106,61 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    
     document.querySelectorAll('.delete-comment-btn').forEach(button => {
         addDeleteEventListener(button);
     });
+
+    // 유저 검색 
+    const searchBtn = document.getElementById('search-btn');
+    const searchOverlay = document.querySelector('.search-overlay');
+    const closeSearchBtn = document.getElementById('close-search');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.querySelector('.search-results');
+
+    if (searchBtn && searchOverlay && closeSearchBtn && searchInput && searchResults) {
+        
+        searchBtn.addEventListener('click', function() {
+            searchOverlay.style.display = 'block';
+            searchInput.focus();
+        });
+
+        
+        closeSearchBtn.addEventListener('click', function() {
+            searchOverlay.style.display = 'none';
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        });
+
+        
+        let timeoutId;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(timeoutId);
+            
+            timeoutId = setTimeout(async () => {
+                const query = this.value.trim();
+                if (query.length > 0) {
+                    try {
+                        const response = await fetch(`/search/users/?q=${encodeURIComponent(query)}`);
+                        const data = await response.json();
+                        
+                        searchResults.innerHTML = data.results.map(user => `
+                            <div class="search-result-item">
+                                <div class="search-result-user">
+                                    <div class="search-result-info">
+                                        <strong>${user.username}</strong>
+                                        <p>${user.bio || ''}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                    } catch (error) {
+                        console.error('검색 오류:', error);
+                    }
+                } else {
+                    searchResults.innerHTML = '';
+                }
+            }, 300);
+        });
+    }
 });

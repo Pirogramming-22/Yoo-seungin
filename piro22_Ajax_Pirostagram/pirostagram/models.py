@@ -19,3 +19,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.author.username}의 댓글: {self.content}'
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics/', default='profile_pics/default.png')
+    followers = models.ManyToManyField(User, related_name='following', blank=True)
+
+    def __str__(self):
+        return f'{self.user.username}의 프로필'

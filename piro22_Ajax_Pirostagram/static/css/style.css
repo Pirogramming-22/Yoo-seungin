@@ -151,6 +151,7 @@ main {
   object-fit: cover;
 }
 
+
 .profile {
   display: flex;
   padding: 0 var(--gutter);
@@ -346,6 +347,78 @@ main {
 
 .like-btn.active {
   color: #ed4956;
+}
+
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #262626;
+  margin-bottom: 20px;
+}
+
+.search-input-wrapper {
+  flex: 1;
+  margin: 0 15px;
+}
+
+#search-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: #262626;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+#search-input:focus {
+  background: #363636;
+  outline: none;
+}
+
+.search-results {
+  padding: 0 16px;
+}
+
+.search-result-item {
+  padding: 16px;
+  border-bottom: 1px solid #262626;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: #121212;
+}
+
+.search-result-user {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.search-result-info strong {
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+}
+
+.search-result-info p {
+  font-size: 14px;
+  color: #8e8e8e;
+  margin-top: 4px;
 }
 
 .comments-section {
