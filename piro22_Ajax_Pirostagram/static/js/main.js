@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         });
     }
+    // 게시물 정렬 
     const sortBtn = document.getElementById('sort-btn');
     const sortOptions = document.querySelector('.sort-options');
 
@@ -204,6 +205,42 @@ function attachPostClickEvents() {
                 window.location.href = `/post/${postId}/`;
             }
         });
+    });
+}
+// 게시물 검색 
+const postSearchInput = document.getElementById('post-search-input');
+const postsContainer = document.querySelector('.posts__contents');
+
+if (postSearchInput) {
+    let searchTimeout;
+    postSearchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        
+        searchTimeout = setTimeout(async () => {
+            const query = this.value.trim();
+            try {
+                const response = await fetch(`/search/posts/?q=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                if (data.posts.length > 0) {
+                    postsContainer.innerHTML = data.posts.map(post => `
+                        <div class="posts__photo" data-post-id="${post.id}">
+                            <img src="${post.image_url}" alt="${post.content}">
+                        </div>
+                    `).join('');
+                } else if (query.length > 0) {
+                    postsContainer.innerHTML = '<p>검색 결과가 없습니다.</p>';
+                } else {
+                    window.location.reload();
+                }
+                
+                
+                attachPostClickEvents();
+                
+            } catch (error) {
+                console.error('게시물 검색 오류:', error);
+            }
+        }, 300);  
     });
 }
 });

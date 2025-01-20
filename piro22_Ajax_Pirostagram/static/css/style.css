@@ -538,3 +538,22 @@ main {
 .sort-option:hover {
   background: #363636;
 }
+
+.search-section {
+  margin-left: 10px;
+}
+
+#post-search-input {
+  padding: 8px 12px;
+  border: 1px solid #262626;
+  border-radius: 4px;
+  background: #262626;
+  color: white;
+  font-size: 14px;
+  width: 200px;
+}
+
+#post-search-input:focus {
+  outline: none;
+  background: #363636;
+}

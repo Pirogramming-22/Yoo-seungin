@@ -124,3 +124,22 @@ def sort_posts(request):
     } for post in posts]
     
     return JsonResponse({'posts': posts_data})
+
+def search_posts(request):
+    if request.method == 'GET':
+        query = request.GET.get('q', '')
+        if query:
+            posts = Post.objects.filter(
+                Q(content__icontains=query) |
+                Q(author__username__icontains=query)
+            ).order_by('-created_at')
+            
+            posts_data = [{
+                'id': post.id,
+                'image_url': post.image.url,
+                'content': post.content,
+                'author': post.author.username
+            } for post in posts]
+            
+            return JsonResponse({'posts': posts_data})
+    return JsonResponse({'posts': []})
