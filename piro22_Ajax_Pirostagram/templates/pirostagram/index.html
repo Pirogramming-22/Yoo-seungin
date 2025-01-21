@@ -1,0 +1,128 @@
+{% extends 'pirostagram/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <header class="header">
+        <div class="header__left">
+            <a href="{% url 'pirostagram:index' %}" class="header__goBackButton">
+                <img src="{% static 'icons/goBack.svg' %}" alt="뒤로 가기 버튼">
+            </a>
+        </div>
+        <div class="header__center">
+            <div class="header__username">Pirogramming</div>
+        </div>
+        <div class="header__rightButtons">
+            <button class="header__alarmButton">
+                <img src="{% static 'icons/notification.svg' %}" alt="알림 열기 버튼">
+            </button>
+            <button class="header__moreButton">
+                <img src="{% static 'icons/more.svg' %}" alt="더보기 열기 버튼">
+            </button>
+        </div>
+    </header>
+    
+    <main>
+        <section class="profile">
+            <div class="profile__image">
+                <img src="{% static 'img/profilePicture.png' %}" alt="프로필 사진">
+            </div>
+            <div class="profile__data">
+                <div class="profile__data-item">
+                    <div class="profile__data-number">{{ post_count }}</div>
+                    <div class="profile__data-type">Posts</div>
+                </div>
+                <div class="profile__data-item">
+                    <div class="profile__data-number">1046</div>
+                    <div class="profile__data-type">Followers</div>
+                </div>
+                <div class="profile__data-item">
+                    <div class="profile__data-number">0</div>
+                    <div class="profile__data-type">Following</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="userInfo">
+            <div>
+                <div class="userInfo__username">{{ user.username }}</div>
+                <div class="userInfo__category">컴퓨터 회사</div>
+                <div class="userInfo__description">프로그래밍의 첫 걸음, 피로그래밍</div>
+            </div>
+            <div class="userInfo__actions">
+                <div class="sort-section">
+                    <button id="sort-btn">게시물 정렬하기</button>
+                    <div class="sort-options" style="display: none;">
+                        <button class="sort-option" data-sort="latest">최신순</button>
+                        <button class="sort-option" data-sort="comments">댓글많은순</button>
+                    </div>
+                </div>
+                <div class="search-section">
+                    <input type="text" id="post-search-input" placeholder="게시물 검색">
+                </div>
+            </div>
+            <button class="userInfo__follow">Follow</button>
+        </section>
+
+        <aside class="highlights">
+            {% for highlight in highlights %}
+            <div class="highlights__item">
+                <button class="highlights__item-image">
+                    <img src="{{ highlight.image.url }}" alt="하이라이트 보기">
+                </button>
+                <div class="highlights_item-title">{{ highlight.title }}</div>
+            </div>
+            {% endfor %}
+        </aside>
+
+        <section class="posts">
+            <nav class="posts__tabBar">
+                <div class="posts__tab posts__tab--selected">게시물</div>
+                <div class="posts__tab">태그됨</div>
+                <div class="posts__tab">저장됨</div>
+            </nav>
+            <article class="posts__contents">
+                {% for post in posts %}
+                <div class="posts__photo" data-post-id="{{ post.id }}">
+                    <img src="{{ post.image.url }}" alt="포스트 이미지">
+                </div>
+                {% empty %}
+                <p>No posts available.</p>
+                {% endfor %}
+            </article>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <nav class="footer__nav">
+            <a href="{% url 'pirostagram:index' %}" class="footer__button">
+                <img src="{% static 'icons/home.svg' %}" alt="홈">
+            </a>
+            <button class="footer__button" id="search-btn">
+                <img src="{% static 'icons/search.svg' %}" alt="검색">
+            </button>
+            <button class="footer__button">
+                <img src="{% static 'icons/add.svg' %}" alt="게시물 추가">
+            </button>
+            <a href="{% url 'logout' %}" class="footer__button">
+                <img src="{% static 'icons/logout.svg' %}" alt="로그아웃">
+            </a>
+            <button class="footer__button">
+                <img src="{% static 'icons/profile.svg' %}" alt="프로필">
+            </button>
+        </nav>
+    </footer>
+    
+    <div class="search-overlay" style="display: none;">
+        <header class="search-header">
+            <button class="back-btn" id="close-search">
+                <img src="{% static 'icons/goBack.svg' %}" alt="뒤로가기">
+            </button>
+            <div class="search-input-wrapper">
+                <input type="text" id="search-input" placeholder="유저 이름을 검색하세요" autocomplete="off">
+            </div>
+        </header>
+        <div class="search-results"></div>
+    </div>
+</div>
+{% endblock %}
